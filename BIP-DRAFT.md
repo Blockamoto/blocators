@@ -64,9 +64,33 @@ All indexes are zero-based.
 
 ## Hash tokens
 
-A block hash or transaction ID MUST be represented as exactly 64 lowercase hexadecimal characters.
+A block hash or transaction ID MUST be represented as exactly 64 lowercase hexadecimal characters using the conventional Bitcoin user-facing hexadecimal display order used by Bitcoin Core RPCs.
 
 An exactly 64-character hexadecimal token is interpreted as a hash before it is interpreted as a decimal number.
+
+## Core grammar
+
+```abnf
+digit       = %x30-39
+nzdigit     = %x31-39
+decimal     = "0" / (nzdigit *digit)
+hexlower    = digit / %x61-66
+hash256     = 64hexlower
+
+block-ref   = hash256 / decimal
+tx-ref      = hash256 / decimal
+input-ref   = "i" decimal
+
+block       = block-ref
+transaction = tx-ref "." block-ref
+output      = decimal "." tx-ref "." block-ref
+input       = input-ref "." tx-ref "." block-ref
+satpoint    = decimal "." decimal "." tx-ref "." block-ref
+
+coordinate  = satpoint / input / output / transaction / block
+```
+
+Semantic bounds are checked during resolution.
 
 ## Block reference
 
