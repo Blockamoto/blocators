@@ -278,7 +278,19 @@ BPS therefore complements rather than replaces hash identities:
 
 BPS does not define a positional identifier for an unconfirmed transaction.
 
-## 10. Namespace qualification
+## 10. Network context
+
+A BPS coordinate does not, by itself, identify a Bitcoin network.
+
+The resolver context MUST establish the selected Bitcoin network or chain before resolving a height-based coordinate.
+
+For example, `17.100` may refer to different Bitcoin data on mainnet, testnet, signet, or regtest.
+
+A block-hash reference identifies exact block content, but implementations SHOULD still retain network context for policy, validation, and user-interface purposes.
+
+Network identification belongs to the surrounding API, transport, namespace, or application context rather than to the core coordinate grammar.
+
+## 11. Namespace qualification
 
 The BPS coordinate is independent of transport and namespace.
 
@@ -303,7 +315,7 @@ god://100.2.17.840000.bitcoin
 
 Such wrappers are outside the BPS core specification.
 
-## 11. Error behavior
+## 12. Error behavior
 
 A conforming resolver MUST reject a coordinate when:
 
@@ -317,7 +329,7 @@ A conforming resolver MUST reject a coordinate when:
 
 Resolvers MUST NOT silently substitute another object when an explicit hash identity fails membership verification.
 
-## 12. Non-goals
+## 13. Non-goals
 
 BPS core does not define:
 
@@ -334,7 +346,7 @@ BPS core does not define:
 
 Those systems may use BPS coordinates without becoming part of BPS.
 
-## 13. Extensions
+## 14. Extensions
 
 Extensions MAY add typed branches to BPS if they:
 
@@ -346,7 +358,7 @@ Extensions MAY add typed branches to BPS if they:
 
 The first proposed extension is inscription addressing, documented in [extensions/ordinals.md](extensions/ordinals.md).
 
-## 14. Open item: input-relative offsets
+## 15. Open item: input-relative offsets
 
 A possible extension has the shape:
 
