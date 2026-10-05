@@ -288,7 +288,29 @@ Inputs are a sibling branch of outputs, so they require an explicit type marker.
 
 BPS does not force applications to choose between human positional references and cryptographic identities.
 
-Where an exact block or transaction identity is known, the corresponding hash may replace its positional token while the containment structure remains unchanged.
+Block height and block hash occupy the same `block-ref` position in the grammar. Transaction index and txid occupy the same `tx-ref` position.
+
+Accordingly, the same confirmed transaction may be represented as:
+
+```text
+17.840000
+TXID.840000
+17.BLOCKHASH
+TXID.BLOCKHASH
+```
+
+The same substitutions apply to output, input, and satpoint coordinates without changing the hierarchy.
+
+These forms are syntactically interchangeable but have different operational properties.
+
+There is no single mandatory preferred representation:
+
+- fully positional forms SHOULD be preferred when compactness, readability, and direct retrieval context are the primary goals;
+- block-hash forms SHOULD be preferred when the reference must remain anchored to one exact historical block across reorganizations;
+- txid forms SHOULD be preferred when exact transaction identity is more important than compactness;
+- applications MAY combine txid and block hash when both exact transaction identity and exact block context are desirable.
+
+A resolver MUST preserve the semantics of whichever reference form was supplied rather than silently normalizing a stronger hash-anchored reference into a weaker chain-relative one.
 
 ## No unconfirmed positional reference
 
