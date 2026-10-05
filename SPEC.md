@@ -258,6 +258,25 @@ The same substitution applies below the transaction level:
 
 BPS does not define a separate hash for an input or output. Their identities remain positions within the containing transaction.
 
+### 7.1 Reference modes and preference
+
+The interchangeable forms are not semantically identical under all chain conditions.
+
+A resolver and application SHOULD choose representation according to the required property:
+
+| Form | Property |
+|---|---|
+| `17.840000` | shortest and most human-readable; direct block retrieval context; chain-relative |
+| `TXID.840000` | exact transaction identity plus direct height context; fails membership if a reorg removes that tx from the height |
+| `17.BLOCKHASH` | exact block anchoring with compact transaction position |
+| `TXID.BLOCKHASH` | exact transaction identity and exact block context; longest form |
+
+No one form is globally canonical for every use case.
+
+When producing a new human-facing BPS reference, implementations SHOULD prefer the fully positional form unless the application requires stronger historical anchoring.
+
+When preserving or relaying an existing BPS reference, implementations MUST NOT discard hash anchoring without explicit application policy.
+
 ## 8. Chain context and reorganizations
 
 Height-based references are chain-relative.
