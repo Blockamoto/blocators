@@ -34,6 +34,28 @@ A block already has a height. A transaction already has a position in that block
 
 BPS standardizes those relationships as a hierarchy.
 
+## Address as retrieval path
+
+A transaction ID identifies transaction content, but it does not tell a sparse client which block contains that transaction. Without a transaction-to-block index, the client cannot derive the block location from the txid alone.
+
+A positional address carries that missing retrieval context.
+
+For example:
+
+```text
+17.840000
+```
+
+tells a resolver to:
+
+1. resolve block height `840000` to its block hash using the selected chain/header context;
+2. request that block from a peer able to serve it;
+3. select transaction index `17` from the returned block.
+
+The same idea extends naturally to outputs and offsets.
+
+This means a BPS address can function as both a human-shareable reference and a deterministic retrieval plan. A user can copy, paste, publish, or send a coordinate without requiring the recipient to already maintain a full transaction-location index.
+
 This is useful for:
 
 - human-readable references to confirmed Bitcoin structure;
