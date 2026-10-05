@@ -54,6 +54,28 @@ tells a resolver to:
 
 The same idea extends naturally to outputs and offsets.
 
+### Position and hash forms
+
+The block and transaction components are deliberately interchangeable between positional and hash references.
+
+For the same confirmed transaction, BPS may express:
+
+```text
+17.840000
+<txid>.840000
+17.<blockhash>
+<txid>.<blockhash>
+```
+
+The hierarchy does not change when a hash replaces a position.
+
+There is no single globally preferred form. The useful default depends on the job:
+
+- use positional forms when compactness, readability, and direct retrieval context are the priority;
+- use a block hash when the reference must remain anchored to one exact historical block across reorgs;
+- use a txid when exact transaction identity matters more than compactness;
+- combine both hashes when maximum explicit anchoring is worth the extra length.
+
 This means a BPS address can function as both a human-shareable reference and a deterministic retrieval plan. A user can copy, paste, publish, or send a coordinate without requiring the recipient to already maintain a full transaction-location index.
 
 This is useful for:
