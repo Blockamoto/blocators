@@ -63,6 +63,7 @@ Examples:
 Transaction IDs and block hashes:
 
 - MUST be exactly 64 hexadecimal characters.
+- MUST use the conventional Bitcoin user-facing hexadecimal display order used by Bitcoin Core RPCs.
 - MUST be serialized in lowercase in canonical form.
 - are parsed as hashes before decimal integers when a token is exactly 64 hexadecimal characters.
 
@@ -85,6 +86,32 @@ input-ref    = "i" decimal
 ```
 
 A resolver determines whether `block-ref` is a height or block hash, and whether `tx-ref` is a transaction index or txid, using the lexical rules above.
+
+### 4.1 ABNF
+
+The following ABNF describes the canonical core syntax. Semantic bounds are checked during resolution.
+
+```abnf
+digit       = %x30-39
+nzdigit     = %x31-39
+decimal     = "0" / (nzdigit *digit)
+hexlower    = digit / %x61-66
+hash256     = 64hexlower
+
+block-ref   = hash256 / decimal
+tx-ref      = hash256 / decimal
+input-ref   = "i" decimal
+
+block       = block-ref
+transaction = tx-ref "." block-ref
+output      = decimal "." tx-ref "." block-ref
+input       = input-ref "." tx-ref "." block-ref
+satpoint    = decimal "." decimal "." tx-ref "." block-ref
+
+coordinate  = satpoint / input / output / transaction / block
+```
+
+Parsers MUST apply the hash-token precedence rule before interpreting a 64-character hexadecimal token as a decimal integer.
 
 ## 5. Core coordinate forms
 
