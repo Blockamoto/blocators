@@ -66,6 +66,7 @@ BPS also does not claim the `bitcoin:` URI scheme, which is already used by Bitc
 - [BIP-DRAFT.md](BIP-DRAFT.md) — BIP-shaped draft for the Bitcoin-native core
 - [PRIOR-ART.md](PRIOR-ART.md) — TxRef, early Ordinal slot notation, compressed transactions, and related work
 - [IMPLEMENTATION.md](IMPLEMENTATION.md) — current Gateway implementation and conformance notes
+- [TEST-VECTORS.md](TEST-VECTORS.md) — initial shared conformance vectors
 - [extensions/ordinals.md](extensions/ordinals.md) — non-core Ordinals/inscription extension
 - [OPEN-QUESTIONS.md](OPEN-QUESTIONS.md) — unresolved design questions
 
