@@ -205,6 +205,14 @@ A block-hash coordinate is anchored to one exact block and therefore does not re
 
 Applications MUST choose confirmation-depth and block-anchoring policies appropriate to their use case.
 
+## Network context
+
+A BPS coordinate does not encode mainnet, testnet, signet, or regtest.
+
+The resolver context MUST establish the selected Bitcoin network before resolving a height-based coordinate.
+
+Network selection belongs to the surrounding application, API, namespace, or transport rather than to the core coordinate grammar.
+
 ## Namespace and transport
 
 The BPS coordinate is independent of URI schemes, DNS, or application namespaces.
