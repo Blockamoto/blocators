@@ -42,13 +42,26 @@ A position inside an output can be expressed as an offset.
 
 Applications that want to refer to these objects currently use txids, block hashes, application-specific indexes, explorer URLs, or ad hoc positional grammars.
 
+A txid identifies transaction content, but it does not encode the block containing that transaction. A sparse client that does not maintain a transaction-to-block index cannot derive the transaction's historical block location from the txid alone.
+
+A positional transaction reference carries that location directly. Given:
+
+```text
+17.840000
+```
+
+a resolver can resolve height 840000 through its selected chain or header context, obtain the corresponding block hash, retrieve that block from a peer able to serve it, and select transaction index 17 from the block. The recipient does not need a global transaction-location index in order to know what historical Bitcoin data must be fetched.
+
+The same property extends to outputs and offsets. A BPS coordinate can therefore serve both as a shareable human-readable reference and as a deterministic retrieval path through confirmed Bitcoin structure.
+
 A standardized positional system has several useful properties:
 
 1. positions can be shorter and more human-readable than 256-bit hashes;
 2. positions naturally express containment;
 3. each level can be independently addressable;
-4. sparse or light clients can use a coordinate to request only the historical Bitcoin data required for resolution;
-5. protocols can share references without inventing incompatible positional syntax.
+4. sparse or light clients can use a coordinate to determine which historical block must be retrieved, without first maintaining a global transaction-location index;
+5. a coordinate can act as both a shareable reference and a deterministic retrieval plan;
+6. protocols can share references without inventing incompatible positional syntax.
 
 BPS complements rather than replaces cryptographic hashes. Hashes identify content before confirmation; positions become available after confirmed placement in chain history.
 
