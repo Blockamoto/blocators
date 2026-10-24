@@ -10,7 +10,7 @@ Version: 0.1.0
 
 # Abstract
 
-This BIP specifies the blocators, a deterministic textual coordinate system for referring to confirmed Bitcoin structure by position.
+This BIP specifies blocators, a deterministic textual coordinate system for referring to confirmed Bitcoin structure by position.
 
 blocators defines hierarchical references for blocks, transactions, transaction inputs, transaction outputs, and satoshi-denominated offsets within outputs. A basic positional coordinate is written from the most specific object toward its containing Bitcoin structure, for example `100.2.17.840000` for offset 100 of output 2 of transaction 17 in block 840000.
 
