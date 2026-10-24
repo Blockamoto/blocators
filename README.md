@@ -1,6 +1,8 @@
 # blocators
 
-**A positional addressing system for Bitcoin.**
+**Bitcoin locators: a positional addressing system for Bitcoin.**
+
+The name `blocators` is short for **Bitcoin locators**. A single reference is a `blocator`; the system and multiple references are `blocators`.
 
 Bitcoin already gives blocks, transactions, inputs, outputs, and positions within outputs an ordered structure. blocators gives that structure a compact, deterministic textual coordinate system.
 
@@ -141,4 +143,4 @@ Gateway is the first implementation and currently supports a substantial subset 
 
 ## Terminology compatibility
 
-The project was previously named Bitcoin Positional System (BPS). The rename to lowercase `blocator` (one reference) and `blocators` (the system or multiple references) changes terminology only. The positional grammar, hash forms, namespace rules, and existing conformance vectors are unchanged. Persisted implementation profile strings and authenticated historical bytes may retain their original spelling when changing them would alter identity; they are compatibility identifiers, not an alternative grammar.
+The project uses lowercase `blocator` (one reference) and `blocators` (the system or multiple references). The naming update changes terminology only. The positional grammar, hash forms, namespace rules, and existing conformance vectors are unchanged. Persisted implementation profile strings and authenticated historical bytes may retain their original spelling when changing them would alter identity; they are compatibility identifiers, not an alternative grammar.
