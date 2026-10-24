@@ -32,7 +32,7 @@ i<input>.transaction.block
 - **input index** — the zero-based `vin` position within a transaction.
 - **offset** — a zero-based satoshi-denominated offset within an output.
 - **satpoint** — an outpoint plus an offset. blocators can express a satpoint position without assigning a global ordinal number to the satoshi at that position.
-- **coordinate** — a blocators string without a namespace qualifier.
+- **coordinate** — a blocator string without a namespace qualifier.
 - **qualified name** — a blocator with an implementation-defined namespace qualifier such as `.bitcoin`.
 
 ## 3. Canonical lexical rules
