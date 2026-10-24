@@ -1,13 +1,13 @@
-# Bitcoin Positional System — Core Specification
+# blocators — Core Specification
 
 Status: Experimental draft  
 Version: 0.1
 
 ## 1. Purpose
 
-Bitcoin Positional System (BPS) defines a deterministic textual coordinate system for confirmed Bitcoin structure.
+blocators defines a deterministic textual coordinate system for confirmed Bitcoin structure.
 
-BPS describes positions that already exist in Bitcoin. It does not alter consensus or introduce new blockchain objects.
+blocators describes positions that already exist in Bitcoin. It does not alter consensus or introduce new blockchain objects.
 
 The core hierarchy is:
 
@@ -31,9 +31,9 @@ i<input>.transaction.block
 - **output index** — the zero-based `vout` position within a transaction.
 - **input index** — the zero-based `vin` position within a transaction.
 - **offset** — a zero-based satoshi-denominated offset within an output.
-- **satpoint** — an outpoint plus an offset. BPS can express a satpoint position without assigning a global ordinal number to the satoshi at that position.
-- **coordinate** — a BPS string without a namespace qualifier.
-- **qualified name** — a BPS coordinate with an implementation-defined namespace qualifier such as `.bitcoin`.
+- **satpoint** — an outpoint plus an offset. blocators can express a satpoint position without assigning a global ordinal number to the satoshi at that position.
+- **coordinate** — a blocators string without a namespace qualifier.
+- **qualified name** — a blocator with an implementation-defined namespace qualifier such as `.bitcoin`.
 
 ## 3. Canonical lexical rules
 
@@ -205,7 +205,7 @@ Examples:
 
 The offset MUST be less than the output value measured in satoshis.
 
-BPS uses this as a local position within an output. It does not assign or require a global ordinal number and does not, by itself, track that satoshi through later spends.
+blocators uses this as a local position within an output. It does not assign or require a global ordinal number and does not, by itself, track that satoshi through later spends.
 
 ## 6. Resolution
 
@@ -235,7 +235,7 @@ This right-to-left containment model makes truncation meaningful:
 
 ## 7. Equivalent references
 
-Different BPS coordinates may resolve to the same Bitcoin object.
+Different blocators may resolve to the same Bitcoin object.
 
 After resolving block height `840000` to `BLOCKHASH` and transaction index `17` to `TXID`, these transaction coordinates are equivalent while their referenced facts remain true:
 
@@ -256,7 +256,7 @@ The same substitution applies below the transaction level:
 100.2.TXID.BLOCKHASH
 ```
 
-BPS does not define a separate hash for an input or output. Their identities remain positions within the containing transaction.
+blocators does not define a separate hash for an input or output. Their identities remain positions within the containing transaction.
 
 ### 7.1 Reference modes and preference
 
@@ -273,9 +273,9 @@ A resolver and application SHOULD choose representation according to the require
 
 No one form is globally canonical for every use case.
 
-When producing a new human-facing BPS reference, implementations SHOULD prefer the fully positional form unless the application requires stronger historical anchoring.
+When producing a new human-facing blocators reference, implementations SHOULD prefer the fully positional form unless the application requires stronger historical anchoring.
 
-When preserving or relaying an existing BPS reference, implementations MUST NOT discard hash anchoring without explicit application policy.
+When preserving or relaying an existing blocators reference, implementations MUST NOT discard hash anchoring without explicit application policy.
 
 ## 8. Chain context and reorganizations
 
@@ -313,20 +313,20 @@ Applications MUST choose confirmation and anchoring policy appropriate to their 
 
 ## 9. Confirmed-data scope
 
-BPS core coordinates are defined over confirmed block structure.
+blocators core coordinates are defined over confirmed block structure.
 
 A transaction has a txid before confirmation but does not have a block position until a miner places it in a block.
 
-BPS therefore complements rather than replaces hash identities:
+blocators therefore complements rather than replaces hash identities:
 
 - hashes can identify objects before chain position is known;
 - positions identify objects after chain placement is known.
 
-BPS does not define a positional identifier for an unconfirmed transaction.
+blocators does not define a positional identifier for an unconfirmed transaction.
 
 ## 10. Network context
 
-A BPS coordinate does not, by itself, identify a Bitcoin network.
+A blocator does not, by itself, identify a Bitcoin network.
 
 The resolver context MUST establish the selected Bitcoin network or chain before resolving a height-based coordinate.
 
@@ -338,7 +338,7 @@ Network identification belongs to the surrounding API, transport, namespace, or 
 
 ## 11. Namespace qualification
 
-The BPS coordinate is independent of transport and namespace.
+The blocator is independent of transport and namespace.
 
 An implementation MAY expose a qualified form:
 
@@ -348,18 +348,18 @@ An implementation MAY expose a qualified form:
 
 The `.bitcoin` suffix is not part of the core coordinate grammar.
 
-BPS does not allocate a DNS top-level domain. Some valid BPS hash tokens are 64 characters long and therefore exceed the 63-octet DNS label limit.
+blocators does not allocate a DNS top-level domain. Some valid blocators hash tokens are 64 characters long and therefore exceed the 63-octet DNS label limit.
 
-BPS also does not claim the `bitcoin:` URI scheme.
+blocators also does not claim the `bitcoin:` URI scheme.
 
-Transports and APIs MAY wrap a BPS coordinate in their own syntax, for example:
+Transports and APIs MAY wrap a blocator in their own syntax, for example:
 
 ```text
-bps.resolve("100.2.17.840000")
+blocator.resolve("100.2.17.840000")
 god://100.2.17.840000.bitcoin
 ```
 
-Such wrappers are outside the BPS core specification.
+Such wrappers are outside the blocators core specification.
 
 ## 12. Error behavior
 
@@ -377,7 +377,7 @@ Resolvers MUST NOT silently substitute another object when an explicit hash iden
 
 ## 13. Non-goals
 
-BPS core does not define:
+blocators core does not define:
 
 - Bitcoin consensus changes;
 - transaction serialization changes;
@@ -390,11 +390,11 @@ BPS core does not define:
 - peer-to-peer retrieval;
 - a DNS allocation.
 
-Those systems may use BPS coordinates without becoming part of BPS.
+Those systems may use blocators without becoming part of blocators.
 
 ## 14. Extensions
 
-Extensions MAY add typed branches to BPS if they:
+Extensions MAY add typed branches to blocators if they:
 
 1. preserve unambiguous parsing;
 2. define exact containment and resolution semantics;
@@ -414,4 +414,4 @@ A possible extension has the shape:
 
 This could identify a satoshi-denominated position entering a transaction through a particular input.
 
-It is intentionally **not** normative in BPS 0.1. Unlike an output satpoint, input-relative offset semantics must account for the value and ordering of previous outputs and special coinbase behavior. The rules should be specified before the syntax is standardized.
+It is intentionally **not** normative in blocators 0.1. Unlike an output satpoint, input-relative offset semantics must account for the value and ordering of previous outputs and special coinbase behavior. The rules should be specified before the syntax is standardized.

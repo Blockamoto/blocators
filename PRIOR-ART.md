@@ -1,8 +1,8 @@
 # Prior Art and Historical Lineage
 
-BPS does not claim that positional references to Bitcoin structure are a new idea.
+blocators does not claim that positional references to Bitcoin structure are a new idea.
 
-Several earlier proposals independently demonstrate that block position is a useful primitive. BPS differs by making the positional hierarchy itself the primary, recursively addressable object.
+Several earlier proposals independently demonstrate that block position is a useful primitive. blocators differs by making the positional hierarchy itself the primary, recursively addressable object.
 
 ## 1. BIP 136 — TxRef
 
@@ -22,7 +22,7 @@ BIP 136 is the closest formal Bitcoin precedent for the claim that a confirmed t
 
 ### Shared ground
 
-BIP 136 and BPS both recognize:
+BIP 136 and blocators both recognize:
 
 - block height + transaction index as a valid transaction locator;
 - output index as a further positional refinement;
@@ -33,7 +33,7 @@ BIP 136 and BPS both recognize:
 
 TxRef encodes selected positional data into a compact checksummed identifier.
 
-BPS makes the hierarchy itself explicit and independently addressable:
+blocators makes the hierarchy itself explicit and independently addressable:
 
 ```text
 840000
@@ -42,7 +42,7 @@ BPS makes the hierarchy itself explicit and independently addressable:
 100.2.17.840000
 ```
 
-BPS also defines typed input coordinates, a satpoint/output-offset level, hash/position equivalence rules, and resolver semantics.
+blocators also defines typed input coordinates, a satpoint/output-offset level, hash/position equivalence rules, and resolver semantics.
 
 ## 2. BTCR DID usage of TxRef
 
@@ -54,7 +54,7 @@ https://github.com/w3c-ccg/didm-btcr
 
 This is useful evidence that positional Bitcoin references have been used outside the original TxRef proposal as application-level identifiers.
 
-It also highlights a property relevant to BPS: transaction position is known only after confirmation, while txid identity exists before confirmation.
+It also highlights a property relevant to blocators: transaction position is known only after confirmation, while txid identity exists before confirmation.
 
 ## 3. Casey Rodarmor's 2022 Ordinal Numbers draft — "slot"
 
@@ -76,7 +76,7 @@ Example from the draft:
 83.0.1.100
 ```
 
-This is extremely close to the underlying four-dimensional coordinate represented by BPS.
+This is extremely close to the underlying four-dimensional coordinate represented by blocators.
 
 ### Shared ground
 
@@ -95,13 +95,13 @@ The slot notation is written container-first:
 block.transaction.output.offset
 ```
 
-BPS is written leaf-first:
+blocators is written leaf-first:
 
 ```text
 offset.output.transaction.block
 ```
 
-That reversal is deliberate. BPS is a hierarchical namespace in which the rightmost component is the outer container and each leftward component narrows the target.
+That reversal is deliberate. blocators is a hierarchical namespace in which the rightmost component is the outer container and each leftward component narrows the target.
 
 Every truncation is therefore a valid higher-level reference:
 
@@ -114,7 +114,7 @@ Every truncation is therefore a valid higher-level reference:
 
 The early slot notation appeared inside ordinal theory and did not survive as the normal user-facing addressing grammar of current Ord. Current Ord commonly uses txid/outpoint-based satpoints and inscription IDs instead.
 
-BPS does not adopt ordinal numbering as part of the core system.
+blocators does not adopt ordinal numbering as part of the core system.
 
 ## 4. BIP 337 — Compressed Transactions
 
@@ -129,11 +129,11 @@ BIP 337 is an API/RPC-layer compression proposal. One of its principal compressi
 
 The proposal decompresses back into an ordinary Bitcoin transaction before consensus validation.
 
-### Relevance to BPS
+### Relevance to blocators
 
 BIP 337 independently demonstrates that Bitcoin position is useful not only for human references but also as a machine compression primitive.
 
-BPS does **not** propose using positional references as consensus outpoints.
+blocators does **not** propose using positional references as consensus outpoints.
 
 The relationship is conceptual:
 
@@ -147,17 +147,17 @@ https://github.com/bitcoin/bips/blob/master/bip-0321.mediawiki
 
 BIP 321 standardizes the `bitcoin:` URI scheme for payment requests and related wallet interactions.
 
-For that reason, BPS does not claim `bitcoin:` as its URI scheme.
+For that reason, blocators does not claim `bitcoin:` as its URI scheme.
 
-A BPS implementation can carry coordinates through another protocol or API and may use a namespace qualifier such as `.bitcoin` where appropriate.
+A blocators implementation can carry coordinates through another protocol or API and may use a namespace qualifier such as `.bitcoin` where appropriate.
 
-## 6. What BPS adds
+## 6. What blocators adds
 
-The novelty claim for BPS should be narrow.
+The novelty claim for blocators should be narrow.
 
-BPS does **not** claim invention of positional Bitcoin references.
+blocators does **not** claim invention of positional Bitcoin references.
 
-BPS proposes to standardize the following combination:
+blocators proposes to standardize the following combination:
 
 1. a recursive hierarchy covering block, transaction, output, input, and output offset;
 2. a leaf-first textual form suitable for hierarchical namespace resolution;
@@ -165,12 +165,12 @@ BPS proposes to standardize the following combination:
 4. exact resolution and failure semantics;
 5. explicit equivalence between positional and hash-anchored forms;
 6. separation of the coordinate from namespace and transport;
-7. an extension model that allows systems such as Ordinals to reuse BPS without entering the Bitcoin-native core.
+7. an extension model that allows systems such as Ordinals to reuse blocators without entering the Bitcoin-native core.
 
 ## 7. Historical framing
 
 A conservative historical description is:
 
-> TxRef standardized positional transaction references. Early ordinal theory described a full block/transaction/output/offset coordinate. Compressed Transactions reused position as a data-compression primitive. BPS treats Bitcoin position itself as the object to standardize and exposes the hierarchy directly as a resolvable namespace.
+> TxRef standardized positional transaction references. Early ordinal theory described a full block/transaction/output/offset coordinate. Compressed Transactions reused position as a data-compression primitive. blocators treats Bitcoin position itself as the object to standardize and exposes the hierarchy directly as a resolvable namespace.
 
 That framing credits the lineage without overstating novelty.
