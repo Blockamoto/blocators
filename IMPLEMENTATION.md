@@ -1,6 +1,6 @@
 # Reference Implementation — Gateway
 
-Gateway is the first implementation of the ideas that became BPS.
+Gateway is the first implementation of the ideas that became blocators.
 
 Repository:
 
@@ -12,7 +12,7 @@ Implementation snapshot reviewed for this document:
 6f4cfa24e8eaee5022dd4d8eafb8241f55a23fe1
 ```
 
-This document describes what Gateway currently implements and where the BPS 0.1 specification intentionally goes beyond today's parser.
+This document describes what Gateway currently implements and where the blocators 0.1 specification intentionally goes beyond today's parser.
 
 ## 1. Current positional grammar
 
@@ -124,17 +124,17 @@ Gateway also accepts native activation forms such as:
 god://<resource>.bitcoin
 ```
 
-BPS treats the namespace and transport wrapper as separate from the bare coordinate.
+blocators treats the namespace and transport wrapper as separate from the bare coordinate.
 
 ## 5. DNS bridge behavior
 
-A valid BPS resource is not necessarily a legal DNS hostname.
+A valid blocators resource is not necessarily a legal DNS hostname.
 
 A txid is 64 hexadecimal characters, while a DNS label is limited to 63 octets.
 
-Gateway therefore does not force hash-located BPS resources through its DNS-style bridge. Hash resources are carried through native activation or a local resolver URL instead.
+Gateway therefore does not force hash-located blocators resources through its DNS-style bridge. Hash resources are carried through native activation or a local resolver URL instead.
 
-This behavior supports the BPS rule that namespace qualification is not equivalent to DNS compliance.
+This behavior supports the blocators rule that namespace qualification is not equivalent to DNS compliance.
 
 ## 6. Block retrieval and verification
 
@@ -149,11 +149,11 @@ Gateway's coordinate resolution path:
 
 Gateway can obtain block bytes from ordinary Bitcoin peers using normal Bitcoin P2P block transfer after locating the block.
 
-This is an implementation of BPS resolution over Bitcoin on Demand, not part of the BPS grammar itself.
+This is an implementation of blocators resolution over Bitcoin on Demand, not part of the blocators grammar itself.
 
-## 7. Differences between Gateway today and BPS 0.1 target
+## 7. Differences between Gateway today and blocators 0.1 target
 
-BPS 0.1 intentionally specifies a cleaner target grammar than Gateway currently implements.
+blocators 0.1 intentionally specifies a cleaner target grammar than Gateway currently implements.
 
 ### Not yet implemented in Gateway
 
@@ -161,9 +161,9 @@ BPS 0.1 intentionally specifies a cleaner target grammar than Gateway currently 
 - txid substitution below output/input/satpoint forms;
 - combinations such as `2.<txid>.<blockhash>`;
 - strict no-leading-zero canonicalization for all decimal positional forms;
-- a standalone library/API named BPS independent of Gateway.
+- a standalone library/API named blocators independent of Gateway.
 
-### Implemented in Gateway but outside BPS core
+### Implemented in Gateway but outside blocators core
 
 - inscription occurrence coordinates;
 - `.bitcoin` namespace routing;
@@ -175,11 +175,11 @@ BPS 0.1 intentionally specifies a cleaner target grammar than Gateway currently 
 
 The intended direction is:
 
-1. BPS becomes the implementation-independent grammar.
+1. blocators becomes the implementation-independent grammar.
 2. Gateway keeps backward-compatible parsing where practical.
-3. Gateway emits canonical BPS forms when presenting new coordinates.
-4. Compatibility aliases remain documented as Gateway behavior, not automatically promoted into BPS.
-5. BPS tests are eventually factored into reusable test vectors that Gateway and other implementations can share.
+3. Gateway emits canonical blocators forms when presenting new coordinates.
+4. Compatibility aliases remain documented as Gateway behavior, not automatically promoted into blocators.
+5. blocators tests are eventually factored into reusable test vectors that Gateway and other implementations can share.
 
 ## 9. Relevant Gateway files
 

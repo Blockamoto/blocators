@@ -1,6 +1,6 @@
 # Open Questions
 
-These are intentionally unresolved in BPS 0.1.
+These are intentionally unresolved in blocators 0.1.
 
 The purpose of this file is to keep uncertain design choices visible instead of allowing implementation accidents to become standards.
 
@@ -16,14 +16,14 @@ BIP 136 instead wraps position in Bech32m, gaining checksums and explicit networ
 
 Possible direction:
 
-- keep raw BPS as the canonical coordinate;
+- keep raw blocators as the canonical coordinate;
 - optionally define a separate checksummed transport encoding later.
 
-Do not add a checksum merely to make BPS look more protocol-like. It should solve a concrete transcription or transport problem.
+Do not add a checksum merely to make blocators look more protocol-like. It should solve a concrete transcription or transport problem.
 
 ## 2. How should network context be serialized when it must travel with the coordinate?
 
-BPS core currently requires the surrounding context to establish mainnet, testnet, signet, or regtest.
+blocators core currently requires the surrounding context to establish mainnet, testnet, signet, or regtest.
 
 Possible carriers include:
 
@@ -39,14 +39,14 @@ The core coordinate should remain unchanged unless self-contained network identi
 Current position:
 
 - `.bitcoin` is a useful Gateway namespace qualifier;
-- it is not part of the BPS coordinate;
+- it is not part of the blocator;
 - it is not a DNS allocation.
 
 Questions:
 
-- Should a BPS companion specification standardize the qualified name?
+- Should a blocators companion specification standardize the qualified name?
 - Should different networks have different suffixes?
-- Should BPS remain completely namespace-neutral?
+- Should blocators remain completely namespace-neutral?
 
 ## 4. Block hash syntax and DNS incompatibility
 
@@ -54,11 +54,11 @@ A block hash is a 64-character hexadecimal token.
 
 DNS labels are limited to 63 octets.
 
-Therefore hash-anchored qualified BPS names cannot always be represented as literal DNS hostnames.
+Therefore hash-anchored qualified blocators names cannot always be represented as literal DNS hostnames.
 
 Current direction:
 
-- BPS remains transport-neutral;
+- blocators remains transport-neutral;
 - DNS-compatible bridges support only forms that fit DNS;
 - native resolvers carry full hash forms losslessly.
 
@@ -132,13 +132,13 @@ Candidate:
 
 This may be needed when multiple inscriptions are associated with one satpoint.
 
-It requires exact historical Ordinal-state semantics and is therefore outside the core BPS proposal.
+It requires exact historical Ordinal-state semantics and is therefore outside the core blocators proposal.
 
 ## 9. Confirmation guidance
 
 BIP 136 recommends restrictions and warnings for shallow positional references because reorgs can rebind them.
 
-BPS must decide whether to:
+blocators must decide whether to:
 
 - prescribe confirmation thresholds;
 - give non-normative guidance;
@@ -154,7 +154,7 @@ Implementations have finite integer widths.
 
 Questions:
 
-- Should BPS define explicit maximum values?
+- Should blocators define explicit maximum values?
 - Should bounds follow Bitcoin's actual serialized field limits where available?
 - Should parsers accept arbitrary-precision values and fail only during resolution?
 
@@ -162,7 +162,7 @@ The specification should avoid architecture-dependent behavior.
 
 ## 11. Canonical display of hashes
 
-BPS should explicitly confirm that txids and block hashes use the conventional Bitcoin user-facing hexadecimal display order used by Bitcoin Core RPCs and block explorers.
+blocators should explicitly confirm that txids and block hashes use the conventional Bitcoin user-facing hexadecimal display order used by Bitcoin Core RPCs and block explorers.
 
 This is likely obvious to implementers but should not remain implicit in a final standard.
 
@@ -186,12 +186,12 @@ Current intuition:
 
 This needs explicit consensus before submission.
 
-## 13. BPS and Bitcoin Core RPC
+## 13. blocators and Bitcoin Core RPC
 
 Possible future Core surface:
 
 ```text
-resolvebps "100.2.17.840000"
+resolveblocator "100.2.17.840000"
 ```
 
 This is not required for the Applications-layer BIP.
@@ -202,13 +202,13 @@ Questions:
 - return raw bytes, decoded JSON, or both?
 - should missing pruned block data trigger retrieval or simply return unavailable?
 
-## 14. BPS and peer retrieval
+## 14. blocators and peer retrieval
 
-Bitcoin on Demand makes BPS useful on sparse historical storage.
+Bitcoin on Demand makes blocators useful on sparse historical storage.
 
 That is a separate Peer Services problem.
 
-BPS should not grow peer protocol rules merely because Gateway implements both layers.
+blocators should not grow peer protocol rules merely because Gateway implements both layers.
 
-A later proposal can define how a peer advertises and serves resolvable BPS history.
+A later proposal can define how a peer advertises and serves resolvable blocators history.
 

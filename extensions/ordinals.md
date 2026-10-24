@@ -1,13 +1,13 @@
-# BPS Ordinals Extension
+# blocators Ordinals Extension
 
 Status: Experimental extension draft  
-Core dependency: BPS 0.1
+Core dependency: blocators 0.1
 
-This document is not part of the Bitcoin-native BPS core proposal.
+This document is not part of the Bitcoin-native blocators core proposal.
 
 ## 1. Purpose
 
-BPS core describes positions in confirmed Bitcoin structure. Ordinal theory can reuse those positions while adding inscription and sat-tracking semantics.
+blocators core describes positions in confirmed Bitcoin structure. Ordinal theory can reuse those positions while adding inscription and sat-tracking semantics.
 
 ## 2. Inscription reveal coordinate
 
@@ -78,9 +78,9 @@ Example:
 
 This is not normative in the current draft. Resolving it may require historical Ordinal state rather than only the referenced Bitcoin block.
 
-## 6. Separation from BPS core
+## 6. Separation from blocators core
 
-Keeping inscriptions outside the base proposal means BPS can be evaluated without requiring adoption of:
+Keeping inscriptions outside the base proposal means blocators can be evaluated without requiring adoption of:
 
 - ordinal numbering;
 - sat lineage;

@@ -1,6 +1,6 @@
 BIP: ?
 Layer: Applications
-Title: Bitcoin Positional System
+Title: blocators
 Authors: Bitoshi Blockamoto <TBD>
 Status: Draft
 Type: Specification
@@ -10,13 +10,13 @@ Version: 0.1.0
 
 # Abstract
 
-This BIP specifies the Bitcoin Positional System (BPS), a deterministic textual coordinate system for referring to confirmed Bitcoin structure by position.
+This BIP specifies blocators, a deterministic textual coordinate system for referring to confirmed Bitcoin structure by position.
 
-BPS defines hierarchical references for blocks, transactions, transaction inputs, transaction outputs, and satoshi-denominated offsets within outputs. A basic positional coordinate is written from the most specific object toward its containing Bitcoin structure, for example `100.2.17.840000` for offset 100 of output 2 of transaction 17 in block 840000.
+blocators defines hierarchical references for blocks, transactions, transaction inputs, transaction outputs, and satoshi-denominated offsets within outputs. A basic positional coordinate is written from the most specific object toward its containing Bitcoin structure, for example `100.2.17.840000` for offset 100 of output 2 of transaction 17 in block 840000.
 
 The system also permits block hashes and transaction IDs to replace their corresponding positional references where exact cryptographic identity is preferred.
 
-BPS does not modify Bitcoin consensus, transaction serialization, or peer-to-peer rules. It standardizes a naming and resolution model over data that already exists in confirmed Bitcoin blocks.
+blocators does not modify Bitcoin consensus, transaction serialization, or peer-to-peer rules. It standardizes a naming and resolution model over data that already exists in confirmed Bitcoin blocks.
 
 # Copyright
 
@@ -52,7 +52,7 @@ A positional transaction reference carries that location directly. Given:
 
 a resolver can resolve height 840000 through its selected chain or header context, obtain the corresponding block hash, retrieve that block from a peer able to serve it, and select transaction index 17 from the block. The recipient does not need a global transaction-location index in order to know what historical Bitcoin data must be fetched.
 
-The same property extends to outputs and offsets. A BPS coordinate can therefore serve both as a shareable human-readable reference and as a deterministic retrieval path through confirmed Bitcoin structure.
+The same property extends to outputs and offsets. A blocator can therefore serve both as a shareable human-readable reference and as a deterministic retrieval path through confirmed Bitcoin structure.
 
 A standardized positional system has several useful properties:
 
@@ -63,7 +63,7 @@ A standardized positional system has several useful properties:
 5. a coordinate can act as both a shareable reference and a deterministic retrieval plan;
 6. protocols can share references without inventing incompatible positional syntax.
 
-BPS complements rather than replaces cryptographic hashes. Hashes identify content before confirmation; positions become available after confirmed placement in chain history.
+blocators complements rather than replaces cryptographic hashes. Hashes identify content before confirmation; positions become available after confirmed placement in chain history.
 
 # Specification
 
@@ -191,7 +191,7 @@ Example:
 
 The offset is measured in satoshis from the beginning of the output and MUST be less than the output value.
 
-This coordinate describes a local position within an output. BPS does not assign a global ordinal number to the satoshi at that position and does not track it through later spends.
+This coordinate describes a local position within an output. blocators does not assign a global ordinal number to the satoshi at that position and does not track it through later spends.
 
 ## Resolution order
 
@@ -244,7 +244,7 @@ Applications MUST choose confirmation-depth and block-anchoring policies appropr
 
 ## Network context
 
-A BPS coordinate does not encode mainnet, testnet, signet, or regtest.
+A blocator does not encode mainnet, testnet, signet, or regtest.
 
 The resolver context MUST establish the selected Bitcoin network before resolving a height-based coordinate.
 
@@ -252,7 +252,7 @@ Network selection belongs to the surrounding application, API, namespace, or tra
 
 ## Namespace and transport
 
-The BPS coordinate is independent of URI schemes, DNS, or application namespaces.
+The blocator is independent of URI schemes, DNS, or application namespaces.
 
 Implementations MAY expose a qualified name such as:
 
@@ -270,7 +270,7 @@ This BIP also does not claim the `bitcoin:` URI scheme.
 
 Earlier positional proposals have commonly serialized the outer container first.
 
-BPS uses leaf-first order so the outer Bitcoin context remains on the right:
+blocators uses leaf-first order so the outer Bitcoin context remains on the right:
 
 ```text
 offset.output.transaction.block
@@ -286,7 +286,7 @@ Inputs are a sibling branch of outputs, so they require an explicit type marker.
 
 ## Hash substitution
 
-BPS does not force applications to choose between human positional references and cryptographic identities.
+blocators does not force applications to choose between human positional references and cryptographic identities.
 
 Block height and block hash occupy the same `block-ref` position in the grammar. Transaction index and txid occupy the same `tx-ref` position.
 
@@ -316,7 +316,7 @@ A resolver MUST preserve the semantics of whichever reference form was supplied 
 
 A transaction has a txid before it is mined but has no block position until confirmation.
 
-BPS therefore intentionally does not define a positional reference for unconfirmed transactions.
+blocators therefore intentionally does not define a positional reference for unconfirmed transactions.
 
 This reflects a useful division:
 
@@ -325,11 +325,11 @@ This reflects a useful division:
 
 # Backward Compatibility
 
-BPS changes no Bitcoin consensus or transaction rules.
+blocators changes no Bitcoin consensus or transaction rules.
 
-Existing Bitcoin software may ignore BPS entirely.
+Existing Bitcoin software may ignore blocators entirely.
 
-An implementation can resolve BPS coordinates using existing block data and ordinary transaction ordering.
+An implementation can resolve blocators using existing block data and ordinary transaction ordering.
 
 Optional future API/RPC or peer-service support would be separate implementation work and is not required by this BIP.
 
@@ -361,7 +361,7 @@ Resolvers MUST reject input indexes, output indexes, transaction indexes, and ou
 
 # Reference Implementation
 
-Gateway is the first BPS implementation:
+Gateway is the first blocators implementation:
 
 https://github.com/Blockamoto/gateway
 
@@ -369,7 +369,7 @@ The current Gateway parser implements positional transaction, input, output and 
 
 Implementation notes and current conformance gaps are maintained in:
 
-https://github.com/Blockamoto/bitcoin-positional-system/blob/main/IMPLEMENTATION.md
+https://github.com/Blockamoto/blocators/blob/main/IMPLEMENTATION.md
 
 # Prior Art
 
@@ -379,7 +379,7 @@ BIP 136 standardizes a Bech32m encoding of block height plus transaction index a
 
 https://github.com/bitcoin/bips/blob/master/bip-0136.mediawiki
 
-BPS generalizes the underlying positional idea into an explicit recursive hierarchy instead of an opaque encoded identifier.
+blocators generalizes the underlying positional idea into an explicit recursive hierarchy instead of an opaque encoded identifier.
 
 ## Ordinal Numbers draft — slot
 
@@ -391,7 +391,7 @@ block-height.transaction-index.output-index.offset
 
 https://www.mail-archive.com/bitcoin-dev%40lists.linuxfoundation.org/msg10989.html
 
-BPS contains the same underlying positional dimensions but reverses the textual order for hierarchical resolution and does not include ordinal numbering in the core proposal.
+blocators contains the same underlying positional dimensions but reverses the textual order for hierarchical resolution and does not include ordinal numbering in the core proposal.
 
 ## BIP 337 — Compressed Transactions
 
@@ -399,10 +399,10 @@ BIP 337 uses block height and an index within the block as an optional compressi
 
 https://github.com/bitcoin/bips/blob/master/bip-0337.mediawiki
 
-BPS does not propose transaction compression or consensus changes. BIP 337 is evidence that positional references are independently useful as a machine-level primitive.
+blocators does not propose transaction compression or consensus changes. BIP 337 is evidence that positional references are independently useful as a machine-level primitive.
 
 # Extensions
 
 Non-Bitcoin-native concepts such as inscription addressing are outside this BIP.
 
-An experimental BPS Ordinals extension is maintained separately in the project repository.
+An experimental blocators Ordinals extension is maintained separately in the project repository.

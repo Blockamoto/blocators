@@ -1,4 +1,4 @@
-# BPS Test Vectors
+# blocators Test Vectors
 
 Status: Initial draft  
 Network for chain-backed examples: Bitcoin mainnet
@@ -108,7 +108,7 @@ The resolver MUST NOT perform a global txid lookup and return that transaction f
 
 ## 8. Case handling
 
-Canonical BPS hashes are lowercase.
+Canonical blocators hashes are lowercase.
 
 Implementations MAY accept uppercase hexadecimal input as a user convenience, but if they do, canonical output MUST be lowercase.
 
@@ -126,9 +126,9 @@ i0.0.0.bitcoin
 0.0.0.0.bitcoin
 ```
 
-the parsed BPS coordinate MUST be identical to the corresponding bare coordinate.
+the parsed blocator MUST be identical to the corresponding bare coordinate.
 
-The namespace qualifier MUST NOT alter BPS object semantics.
+The namespace qualifier MUST NOT alter blocators object semantics.
 
 ## 10. Network context
 
